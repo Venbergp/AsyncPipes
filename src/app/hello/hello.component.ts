@@ -7,13 +7,19 @@ import {Observable} from "rxjs";
   styleUrls: ['./hello.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TooltipComponent {
+export class TooltipComponent implements OnInit{
 
   // @ts-ignore
   @Input() items: Observable<any[]>;
+  @Input('number') number: any
+
 
 
   constructor() { }
+
+  ngOnInit(): void {
+
+  }
 
 
 

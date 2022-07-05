@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import {Component, ContentChild, OnInit} from '@angular/core';
 import {BehaviorSubject} from "rxjs";
+import {TooltipComponent} from "./hello/hello.component";
 
 @Component({
   selector: 'app-root',
@@ -7,13 +8,28 @@ import {BehaviorSubject} from "rxjs";
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent {
+export class AppComponent implements OnInit{
+
   items :any[] = [];
   items$ = new BehaviorSubject(this.items);
+  number = 1
+
+  @ContentChild(TooltipComponent) comp: any
+
+
 
   add() {
     this.items.push({title:  Math.random()})
     this.items$.next(this.items);
+  }
+
+
+  add1() {
+    this.number += 1
+    console.log(this.number)
+  }
+
+  ngOnInit() {
   }
 
 }
