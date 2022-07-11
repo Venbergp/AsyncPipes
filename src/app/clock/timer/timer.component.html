@@ -1,2 +1,2 @@
 <p>timer works!</p>
-<p> {{(hours | async) + ' : ' + (minutes | async) + ' : ' + (seconds | async)}}</p>
+{{normDate(timer.hours) + ' : ' + normDate(timer.minutes) + ' : ' + normDate(timer.seconds)}}

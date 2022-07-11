@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {Observable} from "rxjs";
 
 @Component({
@@ -11,16 +11,26 @@ export class TimerComponent implements OnInit {
 
 
   // @ts-ignore
-  @Input() hours : Observable<any>
-  // @ts-ignore
-  @Input() minutes : Observable<any>
-  // @ts-ignore
-  @Input() seconds : Observable<any>
+  date = new Date()
+  @Input() timer : any
 
 
-  constructor() { }
+  constructor() {
+
+  }
+
+  normDate(x : string) : string{
+    if (x.length < 2){
+      return '0' + x
+    } else {
+      return x
+    }
+  }
 
   ngOnInit(): void {
+    if (this.timer == null) {
+      this.timer = {hours: this.date.getHours(), minutes : this.date.getMinutes(), seconds: this.date.getSeconds()}
+    }
   }
 
 }

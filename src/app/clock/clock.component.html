@@ -1,5 +1,3 @@
 <p>clock works!</p>
 
-<hr>
-
-<app-timer [hours]="hours$" [minutes]="minutes$" [seconds]="seconds$"></app-timer>
+<app-timer [timer]="timer$ | async"> </app-timer>

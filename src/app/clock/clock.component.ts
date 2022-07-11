@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
-import {BehaviorSubject} from "rxjs";
+import {BehaviorSubject, interval, map, Observable} from "rxjs";
 
 @Component({
   selector: 'app-clock',
@@ -9,46 +9,21 @@ import {BehaviorSubject} from "rxjs";
 })
 export class ClockComponent implements OnInit {
 
-  date = new Date()
 
-  hours = this.date.getHours()
-  hours$ = new BehaviorSubject(this.hours)
-  minutes = this.date.getMinutes()
-  minutes$ = new BehaviorSubject(this.minutes)
-  seconds = this.date.getSeconds()
-  seconds$ = new BehaviorSubject(this.seconds)
+  timer$ = interval(1000)
+    .pipe(map(() => {
+      let date = new Date()
+      return {hours: date.getHours().toString(), minutes: date.getMinutes().toString(),seconds: date.getSeconds().toString()}
+    }))
 
 
-  addSecond = () => {
-    setTimeout(() => {
 
-      this.seconds += 1
-      if (this.seconds == 60) {
-        this.seconds = 0
-        this.minutes += 1
-        if (this.minutes == 60) {
-          this.minutes = 0
-          this.hours += 1
-          if (this.hours == 24) {
-            this.hours = 0
-          }
-        }
-      }
+  constructor() {
 
-      this.seconds$.next(this.seconds)
-      this.minutes$.next(this.minutes)
-      this.hours$.next(this.hours)
-
-      this.addSecond()
-    }, 1000)
   }
 
-
-
-  constructor() { }
-
   ngOnInit(): void {
-    this.addSecond()
+
   }
 
 }
