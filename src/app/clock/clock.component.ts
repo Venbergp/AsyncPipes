@@ -24,7 +24,7 @@ export class ClockComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.timer$)
-    let a = 20
+    let a = 23
 
   }
 
