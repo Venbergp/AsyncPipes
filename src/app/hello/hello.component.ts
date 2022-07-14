@@ -10,7 +10,7 @@ import {Observable} from "rxjs";
 export class TooltipComponent implements OnInit{
 
   // @ts-ignore
-  @Input() items: Observable<any[]>;
+  @Input() items: any[] | null;
   @Input('number') number: any
 
 

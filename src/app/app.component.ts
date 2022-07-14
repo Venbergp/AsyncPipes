@@ -11,7 +11,6 @@ import {TooltipComponent} from "./hello/hello.component";
 export class AppComponent implements OnInit{
 
   items :any[] = [];
-  items$ = new BehaviorSubject(this.items);
   number = 1
 
   @ContentChild(TooltipComponent) comp: any
@@ -20,7 +19,8 @@ export class AppComponent implements OnInit{
 
   add() {
     this.items.push({title:  Math.random()})
-    this.items$.next(this.items);
+    this.items = Object.assign([],this.items)
+    console.log(this.items)
   }
 
 

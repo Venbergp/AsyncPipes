@@ -1,0 +1,79 @@
+warning: in the working copy of 'src/app/app.component.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/app/app.component.ts', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/app/clock/clock.component.ts', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/app/hello/hello.component.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/app/hello/hello.component.ts', LF will be replaced by CRLF the next time Git touches it
+[1mdiff --git a/src/app/app.component.html b/src/app/app.component.html[m
+[1mindex e3b75c9..caa9028 100644[m
+[1m--- a/src/app/app.component.html[m
+[1m+++ b/src/app/app.component.html[m
+[36m@@ -1,6 +1,6 @@[m
+ <button (click)="add()">Add</button>[m
+ <button (click)="add1()">Add1</button>[m
+[31m-<app-list [items]="items$" [number]="number"></app-list>[m
+[32m+[m[32m<app-list [items]="items" [number]="number"></app-list>[m
+ [m
+ [m
+ <app-clock></app-clock>[m
+[1mdiff --git a/src/app/app.component.ts b/src/app/app.component.ts[m
+[1mindex c1ac843..4fb862a 100644[m
+[1m--- a/src/app/app.component.ts[m
+[1m+++ b/src/app/app.component.ts[m
+[36m@@ -11,7 +11,6 @@[m [mimport {TooltipComponent} from "./hello/hello.component";[m
+ export class AppComponent implements OnInit{[m
+ [m
+   items :any[] = [];[m
+[31m-  items$ = new BehaviorSubject(this.items);[m
+   number = 1[m
+ [m
+   @ContentChild(TooltipComponent) comp: any[m
+[36m@@ -20,7 +19,8 @@[m [mexport class AppComponent implements OnInit{[m
+ [m
+   add() {[m
+     this.items.push({title:  Math.random()})[m
+[31m-    this.items$.next(this.items);[m
+[32m+[m[32m    this.items = Object.assign([],this.items)[m
+[32m+[m[32m    console.log(this.items)[m
+   }[m
+ [m
+ [m
+[1mdiff --git a/src/app/clock/clock.component.ts b/src/app/clock/clock.component.ts[m
+[1mindex dcf89f7..6689e7c 100644[m
+[1m--- a/src/app/clock/clock.component.ts[m
+[1m+++ b/src/app/clock/clock.component.ts[m
+[36m@@ -23,7 +23,8 @@[m [mexport class ClockComponent implements OnInit {[m
+   }[m
+ [m
+   ngOnInit(): void {[m
+[31m-[m
+[32m+[m[32m    console.log(this.timer$)[m
+[32m+[m[32m    let a = 23[m
+   }[m
+ [m
+ }[m
+[1mdiff --git a/src/app/hello/hello.component.html b/src/app/hello/hello.component.html[m
+[1mindex d19ae72..0161038 100644[m
+[1m--- a/src/app/hello/hello.component.html[m
+[1m+++ b/src/app/hello/hello.component.html[m
+[36m@@ -3,7 +3,7 @@[m
+ <br>[m
+ <hr>[m
+ [m
+[31m-<div *ngFor="let item of items | async">{{item.title}}</div>[m
+[32m+[m[32m<div *ngFor="let item of items">{{item.title}}</div>[m
+ [m
+ [m
+ [m
+[1mdiff --git a/src/app/hello/hello.component.ts b/src/app/hello/hello.component.ts[m
+[1mindex 7d1a206..eaee223 100644[m
+[1m--- a/src/app/hello/hello.component.ts[m
+[1m+++ b/src/app/hello/hello.component.ts[m
+[36m@@ -10,7 +10,7 @@[m [mimport {Observable} from "rxjs";[m
+ export class TooltipComponent implements OnInit{[m
+ [m
+   // @ts-ignore[m
+[31m-  @Input() items: Observable<any[]>;[m
+[32m+[m[32m  @Input() items: any[] | null;[m
+   @Input('number') number: any[m
+ [m
+ [m
