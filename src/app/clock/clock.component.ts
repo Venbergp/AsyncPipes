@@ -24,8 +24,13 @@ export class ClockComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.timer$)
+<<<<<<< HEAD
     let a = 27
     let b = 30
+=======
+    let a = 23
+    let b = 40
+>>>>>>> feature
   }
 
 }
